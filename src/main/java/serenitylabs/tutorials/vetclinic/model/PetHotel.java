@@ -30,8 +30,8 @@ public class PetHotel {
         return guestList.getGuests();
     }
 
-    public static PetHotel called(String name) {
-        return new PetHotel(name);
+    public static PetHotel called(String hotelName) {
+        return new PetHotel(hotelName);
     }
 
     private enum HotelAvailability { Available, Full}

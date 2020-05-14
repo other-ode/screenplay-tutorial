@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import serenitylabs.tutorials.vetclinic.model.Pet;
 import serenitylabs.tutorials.vetclinic.model.PetHotel;
-import serenitylabs.tutorials.vetclinic.screenplay.tasks.CheckIn;
 import serenitylabs.tutorials.vetclinic.screenplay.tasks.CheckOut;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,27 +13,24 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 
 @RunWith(SerenityRunner.class)
-public class WhenCheckingIntoThePetHotel {
+public class WhenCheckingOutFromThePetHotel {
 
     @Test
-    public void petra_books_her_cat_into_the_hotel(){
-
-        //GIVEN
+    public void petra_checks_her_cat_out_of_the_hotel(){
+        // GIVEN
 
         Actor petra = Actor.named("Petra the pet owner");
         Pet ginger = Pet.cat().named("Ginger");
-        PetHotel petHotel = PetHotel.called("Pet Hotel");
-        //PetHotel petHotel = new PetHotel("Pet Hotel");
+        PetHotel petHotel = PetHotel.called("Pet Hotel California");
+
+        //petra.wasAbleTo(CheckOut.aPet(ginger).into(petHotel));
 
         //WHEN
-        petra.attemptsTo(
-                CheckIn.aPet(ginger).into(petHotel)
-                //new CheckIn(ginger, petHotel)
+        petra.wasAbleTo(
+                CheckOut.aPet(ginger).from(petHotel)
         );
-       // petra.booksHerPet(ginger, petHotel);
 
         //THEN
-        assertThat(petHotel.getPets(),hasItem(ginger));
+        assertThat(petHotel.getPets(), not(hasItem(ginger)));
     }
-
 }

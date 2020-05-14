@@ -1,44 +1,44 @@
 package serenitylabs.tutorials.vetclinic.screenplay.tasks;
 
-import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.thucydides.core.annotations.Step;
 import serenitylabs.tutorials.vetclinic.model.Pet;
 import serenitylabs.tutorials.vetclinic.model.PetHotel;
 
-public class CheckIn implements Performable {
+
+public class CheckOut implements Performable {
 
     private Pet pet;
     private PetHotel petHotel;
 
-    public CheckIn(){}
+    public CheckOut(){};
 
-    public CheckIn(Pet pet, PetHotel petHotel) {
+    public CheckOut(Pet pet, PetHotel petHotel) {
         this.pet = pet;
         this.petHotel = petHotel;
     }
 
-    public static CheckInBuilder aPet(Pet pet) {
-        return new CheckInBuilder(pet);
+    public static CheckOutBuilder aPet(Pet pet) {
+        return new CheckOutBuilder(pet);
     }
 
-    @Step("{0} checks #pet into hotel")
+    @Step("{0} checks out #pet from hotel")
     @Override
     public <T extends Actor> void performAs(T t) {
-        petHotel.checkIn(pet);
+        petHotel.checkOut(pet);
 
     }
 
-    public static class CheckInBuilder {
+    public static class CheckOutBuilder {
         private Pet pet;
 
-        public CheckInBuilder(Pet pet) {
+        public CheckOutBuilder(Pet pet) {
             this.pet = pet;
         }
 
-        public Performable into(PetHotel petHotel) {
-            return new CheckIn(pet,petHotel);
+        public Performable from(PetHotel petHotel) {
+            return new CheckOut(pet,petHotel);
         }
     }
 }
