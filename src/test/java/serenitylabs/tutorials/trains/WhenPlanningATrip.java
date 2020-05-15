@@ -87,7 +87,7 @@ public class WhenPlanningATrip {
         );
 
         carrie.should(
-                seeThat(TheTarget.textOf(TFLSearchResultsPage.FIRST_ARTICLE_HEADING), equalTo("Jubilee"))
+                seeThat(TheTarget.textOf(TFLSearchResultsPage.FIRST_ARTICLE_HEADING), containsString("Jubilee"))
         );
     }
 
