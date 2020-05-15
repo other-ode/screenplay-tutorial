@@ -7,9 +7,11 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import net.thucydides.core.annotations.Managed;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import serenitylabs.tutorials.trains.ui.TFLHomePage;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.containsString;
@@ -22,11 +24,16 @@ public class WhenPlanningATrip {
 
     Actor carrie = Actor.named("Carrie");
 
+    @Before
+    public void setTheStage(){
+        carrie.can(BrowseTheWeb.with(browser));
+    }
+
     @Test
     public void the_TFL_page_title_should_be_visible(){
-        carrie.can(BrowseTheWeb.with(browser));
+        //carrie.can(BrowseTheWeb.with(browser));
 
-        carrie.attemptsTo(Open.url("https://tfl.gov.uk"));
+        carrie.attemptsTo(Open.browserOn().the(TFLHomePage.class));
 
         carrie.should(
                 seeThat(TheWebPage.title(), containsString("Transport for London")));
@@ -36,7 +43,7 @@ public class WhenPlanningATrip {
     //https://tfl.gov.uk/tube-dlr-overground/status/
     @Test
     public void the_TFL_status_page_title_should_be_visible(){
-        carrie.can(BrowseTheWeb.with(browser));
+        //carrie.can(BrowseTheWeb.with(browser));
 
         carrie.attemptsTo(Open.url("https://tfl.gov.uk/tube-dlr-overground/status/"));
 
